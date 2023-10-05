@@ -1,0 +1,21 @@
+name: Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    name: Download Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Android bundle
+        uses: ./
+        with:
+          platform: android
+          build-name: 1.0.0
+          build-number: 20231005

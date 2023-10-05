@@ -1,6 +1,6 @@
 # Flutter Build Action
 
-This action builds Flutter artifacts for provided platform.
+This action builds Flutter artifacts for provided platform. 
 
 ## Usage
 

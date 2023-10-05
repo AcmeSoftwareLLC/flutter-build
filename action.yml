@@ -1,0 +1,51 @@
+name: Flutter Build
+description: Build Flutter Archive
+
+inputs:
+  platform:
+    description: Platform
+    required: true
+  build-name:
+    description: Build Name
+  build-number:
+    description: Build Number
+  base-href:
+    description: Base Href
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: stable
+        cache: true
+
+    - name: Cache Project Dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{ env.PUB_CACHE }}
+          **/.packages
+          **/.flutter-plugins
+          **/.flutter-plugin-dependencies
+          **/.dart_tool/package_config.json
+        key: deps-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: deps-
+
+    - name: Fetch Script
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: |
+          scripts
+
+    - name: Build Archive
+      run: |
+        chmod +x build.sh
+        ./build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }}
+      shell: bash
+      working-directory: scripts
+
+branding:
+  icon: package
+  color: blue

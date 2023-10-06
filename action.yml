@@ -45,6 +45,9 @@ runs:
           scripts
         path: flutter-build-action
 
+    - run: ls
+      shell: bash
+
     - name: Build Archive
       run: |
         pwd

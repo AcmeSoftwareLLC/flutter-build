@@ -49,7 +49,7 @@ runs:
       run: |
         pwd
         ls
-        bash flutter-build-action/scripts/build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
+        bash ./flutter-build-action/scripts/build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 

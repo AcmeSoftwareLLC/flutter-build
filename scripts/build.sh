@@ -50,13 +50,20 @@ case $platform in
     ;;
   "ios")
     buildMode="ios --no-codesign --config-only"
+    if [ "$RUNNER_OS" != "macOS" ]; then
+        echo "platform ios is only supported on macOS"
+        exit 1
+    fi
     ;;
   "macos")
     buildMode="macos --config-only"
+    if [ "$RUNNER_OS" != "macOS" ]; then
+        echo "platform ios is only supported on macOS"
+        exit 1
+    fi
     ;;
   "web")
     buildMode="web"
-    
     ;;
   *)
     echo "Usage: ./build.sh --platform=[android|ios|macos|web]"
@@ -83,5 +90,4 @@ if [ "$envFile" != "" ]; then
     buildCommand="$buildCommand --dart-define=APP_ENV_FILE=$envFile"
 fi
 
-flutter build ios -h -v
 run "$buildCommand"

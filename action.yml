@@ -47,6 +47,7 @@ runs:
 
     - name: Build Archive
       run: |
+        ls
         chmod +x scripts/build.sh
         ./scripts/build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
       shell: bash

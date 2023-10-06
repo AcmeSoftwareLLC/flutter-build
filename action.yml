@@ -11,6 +11,11 @@ inputs:
     description: Build Number
   base-href:
     description: Base Href
+  dart-define-file:
+    description: Dart Define File
+  working-directory:
+    description: Working Directory
+    default: .
 
 runs:
   using: composite
@@ -38,13 +43,14 @@ runs:
       with:
         sparse-checkout: |
           scripts
+        path: flutter-build-action
 
     - name: Build Archive
       run: |
-        chmod +x build.sh
-        ./build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }}
+        chmod +x ./scripts/build.sh
+        ./flutter-build-action/scripts/build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
       shell: bash
-      working-directory: scripts
+      working-directory: ${{ inputs.working-directory }}
 
 branding:
   icon: package

@@ -32,6 +32,9 @@ while [[ $# -gt 0 ]]; do
         --base-href=*)
             baseHref="${1#*=}"
             ;;
+        --env-file=*)
+            envFile="${1#*=}"
+            ;;
         *)
             echo "Invalid argument: $1"
             exit 1
@@ -61,17 +64,23 @@ case $platform in
     ;;
 esac
 
-if [ "$treeShake" != "true" ]; then
-    buildMode="$buildMode --no-tree-shake-icons"
-fi
-
+buildCommand="flutter build $buildMode"
 
 if [ "$buildMode" == "web" ]
 then
     if [ "$baseHref" != "" ]; then
-        buildMode="$buildMode --base-href=$baseHref"
+        buildCommand="$buildCommand --base-href=$baseHref"
     fi
-    run "flutter build $buildMode"
 else
-    run "flutter build $buildMode --build-name=$buildName --build-number=$buildNumber"
+    buildCommand="$buildCommand --build-name=$buildName --build-number=$buildNumber"
 fi
+
+if [ "$treeShake" != "true" ]; then
+    buildCommand="$buildCommand --no-tree-shake-icons"
+fi
+
+if [ "$envFile" != "" ]; then
+    buildCommand="$buildCommand --dart-define=APP_ENV_FILE=$envFile"
+fi
+
+run "$buildCommand"

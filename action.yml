@@ -39,7 +39,7 @@ runs:
         restore-keys: deps-
 
     - name: Build Archive
-      run: .${{ github.action_path }}/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
+      run: $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 

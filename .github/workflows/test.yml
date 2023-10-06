@@ -19,3 +19,10 @@ jobs:
           platform: android
           build-name: 1.0.0
           build-number: 20231005
+          working-directory: example
+
+      - name: Build Web
+        uses: ./
+        with:
+          platform: web
+          working-directory: example

@@ -83,5 +83,5 @@ if [ "$envFile" != "" ]; then
     buildCommand="$buildCommand --dart-define=APP_ENV_FILE=$envFile"
 fi
 
-flutter build ios --no-codesign --config-only --build-name=1.0.0 --build-number=20231005 
-#run "$buildCommand"
+flutter build ios -h -v
+run "$buildCommand"

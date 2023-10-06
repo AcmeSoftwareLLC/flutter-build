@@ -38,17 +38,6 @@ runs:
         key: deps-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: deps-
 
-    - name: Fetch Script
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: |
-          scripts
-        path: flutter-build-action
-
-    - run: ls
-      shell: bash
-      working-directory: flutter-build-action
-
     - name: Build Archive
       run: |
         bash ${{ github.action_path }}/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }}

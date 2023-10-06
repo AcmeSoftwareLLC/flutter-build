@@ -47,6 +47,7 @@ runs:
 
     - run: ls
       shell: bash
+      working-directory: flutter-build-action
 
     - name: Build Archive
       run: |

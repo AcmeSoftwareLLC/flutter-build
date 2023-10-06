@@ -51,14 +51,14 @@ case $platform in
   "ios")
     buildMode="ios --no-codesign --config-only"
     if [ "$RUNNER_OS" != "macOS" ]; then
-        echo "platform ios is only supported on macOS"
+        echo "Platform 'ios' is only supported on macOS."
         exit 1
     fi
     ;;
   "macos")
     buildMode="macos --config-only"
     if [ "$RUNNER_OS" != "macOS" ]; then
-        echo "platform ios is only supported on macOS"
+        echo "Platform 'macos' is only supported on macOS."
         exit 1
     fi
     ;;

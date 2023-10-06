@@ -41,12 +41,15 @@ runs:
     - run: ls
       shell: bash
 
+    - run: echo ${{ inputs.working-directory }}
+      shell: bash
+
     - name: Fetch Script
       uses: actions/checkout@v4
       with:
         sparse-checkout: |
           scripts
-        path: ${{ inputs.working-directory }}
+        path: ${{ inputs.working-directory }}/
 
     - name: Build Archive
       run: |

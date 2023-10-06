@@ -49,7 +49,7 @@ case $platform in
     buildMode="appbundle"
     ;;
   "ios")
-    buildMode="ios --config-only --no-codesign"
+    buildMode="ios --no-codesign --config-only"
     ;;
   "macos")
     buildMode="macos --config-only"

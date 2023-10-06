@@ -13,6 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build iOS bundle
+        uses: ./
+        with:
+          platform: ios
+          build-name: 1.0.0
+          build-number: 20231005
+          working-directory: example
+
       - name: Build Android bundle
         uses: ./
         with:

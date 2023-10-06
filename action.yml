@@ -38,6 +38,9 @@ runs:
         key: deps-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: deps-
 
+    - run: ls
+      shell: bash
+
     - name: Fetch Script
       uses: actions/checkout@v4
       with:

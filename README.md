@@ -15,6 +15,8 @@ steps:
       build-name: 1.0.0
       build-number: 20231005
       dart-define-file: configs/.env.production
+      pub-get: true
+      gen-icons: false
 ```
 
 ### Web Build

@@ -87,7 +87,7 @@ if [ "$treeShake" != "true" ]; then
 fi
 
 if [ "$envFile" != "" ]; then
-    buildCommand="$buildCommand --dart-define=APP_ENV_FILE=$envFile"
+    buildCommand="$buildCommand --dart-define-from-file=$envFile"
 fi
 
 run "$buildCommand"

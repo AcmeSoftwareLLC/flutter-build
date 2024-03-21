@@ -19,9 +19,8 @@ inputs:
   pub-get:
     description: Run Pub Get
     default: 'false'
-  gen-icons:
-    description: Generate Icons
-    default: 'false'
+  pre:
+    description: Allows you to run a script at the start of the build
   tree-shake-icons:
     description: Tree Shake Icons
     default: 'true'
@@ -52,13 +51,10 @@ runs:
       shell: bash
       if: ${{ inputs.pub-get == 'true' }}
 
-    - name: Generate Icons
-      run: dart run icons_launcher:create
-      shell: bash
-      if: ${{ inputs.gen-icons == 'true' }}
-
     - name: Build Archive
-      run: $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }} --tree-shake=${{ inputs.tree-shake-icons }}
+      run: |
+        ${{ inputs.pre }}
+        $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }} --tree-shake=${{ inputs.tree-shake-icons }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 

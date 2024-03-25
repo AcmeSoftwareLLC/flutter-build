@@ -16,9 +16,6 @@ inputs:
   working-directory:
     description: Working Directory
     default: .
-  pub-get:
-    description: Run Pub Get
-    default: 'false'
   pre:
     description: Allows you to run a script at the start of the build
   tree-shake-icons:
@@ -45,11 +42,6 @@ runs:
           **/.dart_tool/package_config.json
         key: deps-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: deps-
-
-    - name: Install Dependencies
-      run: flutter pub get
-      shell: bash
-      if: ${{ inputs.pub-get == 'true' }}
 
     - name: Build Archive
       run: |

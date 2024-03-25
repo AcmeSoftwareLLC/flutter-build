@@ -11,6 +11,19 @@ inputs:
     description: Build Number
   base-href:
     description: Base Href
+  dart-define-file:
+    description: Dart Define File
+  working-directory:
+    description: Working Directory
+    default: .
+  pub-get:
+    description: Run Pub Get
+    default: 'false'
+  pre:
+    description: Allows you to run a script at the start of the build
+  tree-shake-icons:
+    description: Tree Shake Icons
+    default: 'true'
 
 runs:
   using: composite
@@ -33,18 +46,17 @@ runs:
         key: deps-${{ hashFiles('**/pubspec.lock') }}
         restore-keys: deps-
 
-    - name: Fetch Script
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: |
-          scripts
+    - name: Install Dependencies
+      run: flutter pub get
+      shell: bash
+      if: ${{ inputs.pub-get == 'true' }}
 
     - name: Build Archive
       run: |
-        chmod +x build.sh
-        ./build.sh --platform={{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }}
+        ${{ inputs.pre }}
+        $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }} --tree-shake=${{ inputs.tree-shake-icons }}
       shell: bash
-      working-directory: scripts
+      working-directory: ${{ inputs.working-directory }}
 
 branding:
   icon: package

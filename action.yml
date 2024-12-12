@@ -39,7 +39,7 @@ runs:
         channel: stable
         cache: true
         flutter-version: ${{ inputs.flutter-version }}
-        flutter-version-file: ${{ inputs.flutter-version }}
+        flutter-version-file: ${{ inputs.flutter-version-file }}
 
     - name: Cache Project Dependencies
       uses: actions/cache@v4

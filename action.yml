@@ -5,6 +5,14 @@ inputs:
   platform:
     description: Platform
     required: true
+  flutter-version:
+    description: The Flutter version to make available on the path
+    required: false
+    default: ""
+  flutter-version-file:
+    description: The pubspec.yaml file with exact Flutter version defined
+    required: false
+    default: ""
   build-name:
     description: Build Name
   build-number:
@@ -30,6 +38,8 @@ runs:
       with:
         channel: stable
         cache: true
+        flutter-version: ${{ inputs.flutter-version }}
+        flutter-version-file: ${{ inputs.flutter-version }}
 
     - name: Cache Project Dependencies
       uses: actions/cache@v4

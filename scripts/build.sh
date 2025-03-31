@@ -32,6 +32,9 @@ while [[ $# -gt 0 ]]; do
         --base-href=*)
             baseHref="${1#*=}"
             ;;
+        --flavor=*)
+            flavor="${1#*=}"
+            ;;    
         --env-file=*)
             envFile="${1#*=}"
             ;;
@@ -80,6 +83,10 @@ then
     fi
 else
     buildCommand="$buildCommand --build-name=$buildName --build-number=$buildNumber"
+fi
+
+if [ "$flavor" != "" ]; then
+    buildCommand="$buildCommand --flavor=$flavor"
 fi
 
 if [ "$treeShake" != "true" ]; then

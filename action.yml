@@ -17,6 +17,8 @@ inputs:
     description: Build Name
   build-number:
     description: Build Number
+  flavor:
+    description: App Flavor
   base-href:
     description: Base Href
   dart-define-file:
@@ -56,7 +58,13 @@ runs:
     - name: Build Archive
       run: |
         ${{ inputs.pre }}
-        $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }}  --build-name=${{ inputs.build-name }} --build-number=${{ inputs.build-number }}  --base-href=${{ inputs.base-href }} --env-file=${{ inputs.dart-define-file }} --tree-shake=${{ inputs.tree-shake-icons }}
+        $GITHUB_ACTION_PATH/scripts/build.sh --platform=${{ inputs.platform }} \
+          --build-name=${{ inputs.build-name }} \
+          --build-number=${{ inputs.build-number }} \
+          --base-href=${{ inputs.base-href }} \
+          --env-file=${{ inputs.dart-define-file }} \
+          --tree-shake=${{ inputs.tree-shake-icons }} \
+          --flavor=${{ inputs.flavor }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 

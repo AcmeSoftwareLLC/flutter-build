@@ -17,13 +17,13 @@ jobs:
         uses: ./
         with:
           script: flutter build appbundle --release --build-name=1.0.0 --build-number=20231005
-          working-directory: example
+          working-directory: counter
 
       - name: Build Web
         uses: ./
         with:
           script: flutter build web --release
-          working-directory: example
+          working-directory: counter
 
   build-test-mac:
     runs-on: macos-latest
@@ -35,5 +35,5 @@ jobs:
       - name: Build iOS bundle
         uses: ./
         with:
-          script: flutter build ipa --release --build-name=1.0.0 --build-number=20231005
-          working-directory: example
+          script: flutter build ios --release --build-name=1.0.0 --build-number=20231005
+          working-directory: counter

@@ -1,32 +1,42 @@
-# Flutter Build Action
+# Flutter Build with Caching
 
-This action builds Flutter artifacts for provided platform. 
+Build Flutter project with caching of dependencies.
 
 ## Usage
-
-### Non-Web Build
 
 ```yaml
 steps:
   - name: Build Android bundle
-    uses: AcmeSoftwareLLC/flutter-build@v1
+    uses: AcmeSoftwareLLC/flutter-build@v2
     with:
-      platform: android
-      build-name: 1.0.0
-      build-number: 20231005
-      dart-define-file: configs/.env.production
-      pub-get: true
-      gen-icons: false
+      flutter-version: "3.19.6" # optional, specify Flutter version
+      flutter-version-file: "example/pubspec.yaml" # optional, specify pubspec.yaml for version
+      working-directory: example # optional, defaults to .
+      script: flutter build appbundle --release # optional, custom build script
 ```
 
-### Web Build
+
+## Inputs
+
+| Name                  | Description                                               | Required | Default                |
+|-----------------------|-----------------------------------------------------------|----------|------------------------|
+| flutter-version       | The Flutter version to use                                | false    | ""                    |
+| flutter-version-file  | pubspec.yaml file with Flutter version                    | false    | ""                    |
+| working-directory     | Working directory for build                               | false    | .                      |
+| script                | Custom build script to run                                | false    |                        |
+
+## Features
+
+- **Caching**: Dependencies are cached for faster builds.
+- **Custom Build Script**: Use the `script` input to run any custom build command.
+
+## Example: Custom Build Script
 
 ```yaml
 steps:
-  - name: Build Web
-    uses: AcmeSoftwareLLC/flutter-build@v1
+  - name: Build with custom script
+    uses: AcmeSoftwareLLC/flutter-build@v2
     with:
-      platform: web
-      base-href: /my-app/
-      dart-define-file: configs/.env.production
+      script: flutter build ipa --release --dart-define-from-file=configs/.env.production
 ```
+

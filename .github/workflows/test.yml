@@ -16,15 +16,13 @@ jobs:
       - name: Build Android bundle
         uses: ./
         with:
-          platform: android
-          build-name: 1.0.0
-          build-number: 20231005
+          script: flutter build appbundle --release --build-name=1.0.0 --build-number=20231005
           working-directory: example
 
       - name: Build Web
         uses: ./
         with:
-          platform: web
+          script: flutter build web --release
           working-directory: example
 
   build-test-mac:
@@ -37,7 +35,5 @@ jobs:
       - name: Build iOS bundle
         uses: ./
         with:
-          platform: ios
-          build-name: 1.0.0
-          build-number: 20231005
+          script: flutter build ipa --release --build-name=1.0.0 --build-number=20231005
           working-directory: example
